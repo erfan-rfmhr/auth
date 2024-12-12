@@ -4,22 +4,49 @@ services:
       context: .
     ports:
       - '8000:8000'
+    volumes:
+      - static_data:/app/staticfiles
+    environment:
+      DEBUG : false
     depends_on:
       - db
+      - redis
     command:
       - ./infra/run.sh
 
   db:
     image: docker.arvancloud.ir/postgres
     ports:
-      - "5431:5432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
-      POSTGRES_DB: "postgres"
+      POSTGRES_DB: "auth_task_db"
     volumes:
       - db_data:/var/lib/postgresql/data
-    restart: always
+    restart: on-failure
+
+  redis:
+    image: docker.arvancloud.ir/redis
+    ports:
+      - "6379:6379"
+    restart: on-failure
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/logs:/var/log/nginx
+      - static_data:/app/staticfiles
+    ports:
+      - "8080:80"
+    environment:
+      STATIC_URL : /static/
+    depends_on:
+      - backend
+    restart: "on-failure"
 
 volumes:
   db_data:
+  static_data:
