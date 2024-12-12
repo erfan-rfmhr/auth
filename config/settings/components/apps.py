@@ -14,7 +14,9 @@ INSTALLED_APPS_LIBS = [
     "drf_spectacular",
 ]
 
-INSTALLED_APPS_LOCAL = []
+INSTALLED_APPS_LOCAL = [
+    "user",
+]
 
 
 INSTALLED_APPS = (
