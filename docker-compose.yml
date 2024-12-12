@@ -33,7 +33,7 @@ services:
     restart: on-failure
 
   nginx:
-    build: ./nginx
+    build: infra/nginx
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/html:/usr/share/nginx/html
