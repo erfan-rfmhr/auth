@@ -6,6 +6,8 @@ services:
       - '8000:8000'
     depends_on:
       - db
+    command:
+      - ./infra/run.sh
 
   db:
     image: docker.arvancloud.ir/postgres
