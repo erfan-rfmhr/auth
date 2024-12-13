@@ -18,6 +18,7 @@ redis = "^5.2.1"
 django-redis = "^5.4.0"
 djangorestframework-simplejwt = "^5.3.1"
 persian = "^0.5.0"
+factory-boy = "^3.3.1"
 
 
 [build-system]
