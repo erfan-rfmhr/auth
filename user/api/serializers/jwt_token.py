@@ -4,7 +4,7 @@ from rest_framework.fields import empty
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from user.api.fields import PhoneField
-from user.services.otp import OTPService
+from user.services.verification.otp import OTPService
 
 User = get_user_model()
 

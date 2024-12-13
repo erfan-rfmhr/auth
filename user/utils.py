@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.request import Request
 from rest_framework.reverse import reverse
 
-from user.services.otp import OTPService
+from user.services.verification.otp import OTPService
 
 User = get_user_model()
 

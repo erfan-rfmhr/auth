@@ -5,17 +5,16 @@ from django.core.cache import cache
 from rest_framework import serializers
 
 from user.services.decorators import is_not_blocked
+from user.services.verification.abstract import AbstractVerificationService
 
 
-class OTPService:
+class OTPService(AbstractVerificationService):
     max_value = settings.OTP_MAX_VALUE
     min_value = settings.OTP_MIN_VALUE
     key_prefix = settings.OTP_KEY_PREFIX
     counter_prefix = settings.OTP_COUNTER_PREFIX
     max_tries = settings.MAX_AUTHENTICATION_TRIES
-
-    def __init__(self, phone: str):
-        self.phone = phone
+    timeout = settings.OTP_TIMEOUT
 
     @classmethod
     def _generate_random_otp(cls) -> int:
@@ -29,7 +28,7 @@ class OTPService:
         """
         key = self.key_prefix + self.phone
         otp = self._generate_random_otp()
-        cache.set(key, otp, settings.OTP_TIMEOUT)
+        cache.set(key, otp, self.timeout)
         return otp
 
     @classmethod
@@ -44,14 +43,3 @@ class OTPService:
             self.increment_block_counter()
             return False
         return True
-
-    def expire(self):
-        cache.delete(self.key_prefix + self.phone)
-        cache.delete(self.counter_prefix + self.phone)
-
-    def increment_block_counter(self):
-        count = cache.get(self.counter_prefix + self.phone, None)
-        if count is None:
-            cache.set(self.counter_prefix + self.phone, 1, settings.OTP_TIMEOUT)
-        else:
-            cache.set(self.counter_prefix + self.phone, count + 1, settings.OTP_TIMEOUT)
