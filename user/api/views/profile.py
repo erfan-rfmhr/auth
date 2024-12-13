@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.viewsets import mixins
 
@@ -14,3 +15,4 @@ class ProfileViewSet(
 ):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
