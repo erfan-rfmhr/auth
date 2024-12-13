@@ -12,3 +12,8 @@ CACHES = {
         },
     },
 }
+
+OTP_TIMEOUT = 2 * 60
+OTP_KEY_PREFIX = "otp_"
+OTP_MAX_VALUE = 999_999
+OTP_MIN_VALUE = 100_000
