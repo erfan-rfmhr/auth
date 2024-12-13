@@ -35,9 +35,9 @@ services:
   nginx:
     build: infra/nginx
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./nginx/html:/usr/share/nginx/html
-      - ./nginx/logs:/var/log/nginx
+      - ./infra/nginx/conf.d:/etc/nginx/conf.d
+      - ./infra/nginx/html:/usr/share/nginx/html
+      - ./infra/nginx/logs:/var/log/nginx
       - static_data:/app/staticfiles
     ports:
       - "8080:80"
