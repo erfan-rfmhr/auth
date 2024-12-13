@@ -266,6 +266,17 @@ files = [
 ]
 
 [[package]]
+name = "persian"
+version = "0.5.0"
+description = "Simple Python library for Persian language localization"
+optional = false
+python-versions = "*"
+files = [
+    {file = "persian-0.5.0-py3-none-any.whl", hash = "sha256:2290ea7cd781e0eb2abb848826f46aab5c031eef3184b4379dce3787aa8f6adb"},
+    {file = "persian-0.5.0.tar.gz", hash = "sha256:8f363187b4da3be4d9abc29412737e68a58b4077997d25ac7812cb7308abcb31"},
+]
+
+[[package]]
 name = "psycopg2-binary"
 version = "2.9.10"
 description = "psycopg2 - Python-PostgreSQL Database Adapter"
@@ -605,4 +616,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "3d4073e77c7a0192dae5513531b0a0fa58c71a38c1b9fbb2730129391b911a88"
+content-hash = "b72e785b2751fba38fcd8e291559bf2e3b858cb85adb2086b7608e6781d5d990"
