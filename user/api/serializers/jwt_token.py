@@ -1,10 +1,11 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 from rest_framework import serializers
 from rest_framework.fields import empty
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from user.api.fields import PhoneField
 from user.services.verification.otp import OTPService
+from user.services.verification.password import PasswordService
 
 User = get_user_model()
 
@@ -24,6 +25,34 @@ class OTPJWTSerializer(TokenObtainPairSerializer):
             raise serializers.ValidationError("invalid otp")
         service.expire()
         user, _ = User.objects.get_or_create(username=phone)
+        token = self.get_token(user)
+
+        return {
+            "access": str(token.access_token),
+            "refresh": str(token),
+        }
+
+
+class PasswordJWTSerializer(TokenObtainPairSerializer):
+    default_error_messages = {
+        "invalid_password": "Password is invalid.",
+        "blocked_number": "Phone number is blocked.",
+    }
+    service_class = PasswordService
+
+    def validate(self, attrs):
+        username = attrs.get('username')
+        password = attrs.get('password')
+        service = self.service_class(username)
+        blocked = service.is_blocked()
+        if blocked:
+            self.fail("blocked_number")
+        user = authenticate(username=username, password=password)
+        if not user:
+            code = "blocked_number" if blocked else "invalid_password"
+            service.increment_block_counter()
+            raise self.fail(code)
+        service.expire_counter()
         token = self.get_token(user)
 
         return {
