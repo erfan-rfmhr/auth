@@ -10,5 +10,5 @@ User = get_user_model()
 def get_registration_url(phone: str, request: Request) -> str:
     if User.objects.filter(username=phone).exists():
         return request.build_absolute_uri(reverse("user:password_verification"))
-    OTPService.send_otp_sms(phone)
+    OTPService(phone).send_otp_sms()
     return request.build_absolute_uri(reverse("user:otp_verification"))

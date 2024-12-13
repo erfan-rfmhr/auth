@@ -13,6 +13,7 @@ class RegisterView(APIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
-        registration_url = get_registration_url(data["phone"], request)
+        phone = data["phone"]
+        registration_url = get_registration_url(phone, request)
         response_data = {"registration_url": registration_url}
         return Response(response_data, status=status.HTTP_200_OK)

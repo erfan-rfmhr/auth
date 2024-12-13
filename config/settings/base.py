@@ -29,3 +29,10 @@ if DEBUG:
         }
     }
 
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": env("DB_NAME")+".sqlite3",
+        },
+    }
+

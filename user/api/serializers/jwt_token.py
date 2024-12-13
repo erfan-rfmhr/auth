@@ -19,9 +19,10 @@ class OTPJWTSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         phone = attrs.get('phone')
         otp = attrs.get('otp')
-        if not OTPService.is_verified(otp, phone):
+        service = OTPService(phone)
+        if not service.is_verified(otp):
             raise serializers.ValidationError("invalid otp")
-        OTPService.expire(phone)
+        service.expire()
         user, _ = User.objects.get_or_create(username=phone)
         token = self.get_token(user)
 
