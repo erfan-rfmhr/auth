@@ -1,0 +1,20 @@
+{
+	"id": "5637a662-e903-4870-8b8e-44fa35e25748",
+	"values": [
+		{
+			"key": "phone",
+			"value": "09891925442",
+			"enabled": true
+		},
+		{
+			"key": "base",
+			"value": "http://localhost:8080",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2024-12-14T01:13:03.565Z",
+	"_postman_exported_using": "Postman/11.12.0"
+}
