@@ -7,6 +7,7 @@ env = environ.Env(
     DEBUG=(bool, True),
     # Security
     SECRET_KEY=(str, get_random_string(32)),
+    SIGNING_KEY=(str, get_random_string(32)),
     # Database
     DB_NAME=(str, "auth_task_db"),
     DB_USER=(str, "postgres"),

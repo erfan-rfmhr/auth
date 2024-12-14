@@ -17,4 +17,4 @@ class ProfileViewSet(
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
     lookup_field = "username"
-    lookup_url_kwarg = "username"
+    lookup_url_kwarg = "phone"

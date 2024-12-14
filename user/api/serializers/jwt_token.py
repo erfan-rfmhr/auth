@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework import serializers
 from rest_framework.fields import empty
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, PasswordField
 
 from user.api.fields import PhoneField
 from user.services.verification.otp import OTPService
@@ -39,6 +39,12 @@ class PasswordJWTSerializer(TokenObtainPairSerializer):
         "blocked_number": "Phone number is blocked.",
     }
     service_class = PasswordService
+
+    phone = PhoneField(required=True, source="username")
+
+    def __init__(self, instance=None, data=empty, **kwargs):
+        serializers.BaseSerializer.__init__(self, instance, data, **kwargs)
+        self.fields["password"] = PasswordField()
 
     def validate(self, attrs):
         username = attrs.get('username')
