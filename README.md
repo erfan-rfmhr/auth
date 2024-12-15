@@ -16,7 +16,7 @@ A simple otp handler project in Django.
 - Open http://localhost:8000/api/schema/swagger-ui/
 
 ## Configuration
-IF you intend to use this project as it is, it does not need any extra configuration!
+If you intend to use this project as it is, it does not need any extra configuration!
 But if you wanted to, follow the `.env.example` file and create a `.env` file in root directory,
 or change settings from `./config/settings/components` directly.
 
