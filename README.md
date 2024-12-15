@@ -1,15 +1,15 @@
 # Auth project
 A simple otp handler project in Django.
 
-## Installation with Docker
+## Running with Docker
 
 - Run docker compose `docker compose up -d`
 - Open http://localhost:8080/api/schema/swagger-ui/
 
-## Installation without Docker
+## Running without Docker
 
-- Install poetry `pip install poetry==1.8.3`
-- Install dependencies `poetry install`
+- Install poetry `pip install poetry`
+- Install dependencies `poetry install --no-root`
 - Migrate database `python manage.py migrate`
 - Collect statics `python manage.py collectstatic --noinput`
 - Run server `python manage.py runserver`
